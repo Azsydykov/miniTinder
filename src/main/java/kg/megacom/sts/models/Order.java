@@ -6,14 +6,19 @@ public class Order {
     private Status status;
     private String message;
     private boolean match;
+    private long receipentId;
 
 
-    public Order(User user, Status status, String message, boolean match) {
+    public Order(User user, Status status, String message, boolean match, long receipentId) {
         this.id = id;
         this.user = user;
         this.status = status;
         this.message = message;
         this.match = match;
+        this.receipentId = receipentId;
+    }
+
+    public Order() {
     }
 
     public long getId() {
@@ -54,5 +59,25 @@ public class Order {
 
     public void setMatch(boolean match) {
         this.match = match;
+    }
+
+    public long getReceipentId() {
+        return receipentId;
+    }
+
+    public void setReceipentId(long receipentId) {
+        this.receipentId = receipentId;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user.getId() +
+                ", status=" + status +
+                ", message='" + message + '\'' +
+                ", match=" + match +
+                ", receipentId=" + receipentId +
+                '}';
     }
 }

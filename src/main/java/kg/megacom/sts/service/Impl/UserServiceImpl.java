@@ -108,4 +108,5 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Произошла ошибка при удалении пользователя!");
         }
     }
+
 }

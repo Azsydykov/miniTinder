@@ -26,7 +26,5 @@ public class Main {
                 crudOperationService.userCreating();
                 break;
         }
-
-
     }
 }

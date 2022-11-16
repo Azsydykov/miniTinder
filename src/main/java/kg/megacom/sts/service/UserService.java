@@ -1,10 +1,6 @@
 package kg.megacom.sts.service;
-
-
 import kg.megacom.sts.models.User;
-import kg.megacom.sts.service.Impl.OrderServiceImpl;
 import kg.megacom.sts.service.Impl.UserServiceImpl;
-
 import java.sql.SQLException;
 import java.util.List;
 

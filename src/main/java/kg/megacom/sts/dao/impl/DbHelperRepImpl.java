@@ -1,7 +1,5 @@
 package kg.megacom.sts.dao.impl;
-
 import kg.megacom.sts.dao.DbHelperRep;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

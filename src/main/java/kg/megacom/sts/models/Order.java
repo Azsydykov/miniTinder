@@ -1,21 +1,23 @@
 package kg.megacom.sts.models;
 
+import kg.megacom.sts.models.enums.Status;
+
 public class Order {
     private long id;
     private User user;
+    private long recipientId;
     private Status status;
-    private String message;
     private boolean match;
-    private long receipentId;
+    private String message;
 
 
-    public Order(User user, Status status, String message, boolean match, long receipentId) {
+    public Order(User user, long recipientId, Status status,boolean match ,String message) {
         this.id = id;
         this.user = user;
+        this.recipientId = recipientId;
         this.status = status;
-        this.message = message;
         this.match = match;
-        this.receipentId = receipentId;
+        this.message = message;
     }
 
     public Order() {
@@ -61,12 +63,12 @@ public class Order {
         this.match = match;
     }
 
-    public long getReceipentId() {
-        return receipentId;
+    public long getRecipientId() {
+        return recipientId;
     }
 
-    public void setReceipentId(long receipentId) {
-        this.receipentId = receipentId;
+    public void setRecipientId(long receipentId) {
+        this.recipientId = receipentId;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class Order {
                 ", status=" + status +
                 ", message='" + message + '\'' +
                 ", match=" + match +
-                ", receipentId=" + receipentId +
+                ", receipentId=" + recipientId +
                 '}';
     }
 }

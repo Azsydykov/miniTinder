@@ -1,24 +1,23 @@
 package kg.megacom.sts.models;
 
+import kg.megacom.sts.models.enums.Status;
+
 public class User {
     private long id;
     private String name;
     private int age;
-    private String diff;
+    private String definition;
     private String email;
-    private String number;
-    private Status status;
-    private boolean isActive;
 
-    public User(String name, int age, String diff, String email, String number, Status status, boolean isActive) {
+    private Status status;
+
+    public User(String name, int age, String definition, String email, Status status) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.diff = diff;
+        this.definition = definition;
         this.email = email;
-        this.number = number;
         this.status = status;
-        this.isActive = isActive;
     }
 
     public User() {
@@ -48,12 +47,12 @@ public class User {
         this.age = age;
     }
 
-    public String getDiff() {
-        return diff;
+    public String getDefinition() {
+        return definition;
     }
 
-    public void setDiff(String diff) {
-        this.diff = diff;
+    public void setDefinition(String definition) {
+        this.definition = definition;
     }
 
     public String getEmail() {
@@ -64,14 +63,6 @@ public class User {
         this.email = email;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -80,25 +71,15 @@ public class User {
         this.status = status;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", diff='" + diff + '\'' +
+                ", diff='" + definition + '\'' +
                 ", email='" + email + '\'' +
-                ", number='" + number + '\'' +
                 ", status=" + status +
-                ", isActive=" + isActive +
                 '}'+" \n";
     }
 }

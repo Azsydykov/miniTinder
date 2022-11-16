@@ -1,30 +1,47 @@
 package kg.megacom.sts;
 
-import kg.megacom.sts.dao.DbHelper;
-import kg.megacom.sts.service.CrudOperationService;
-import kg.megacom.sts.service.Impl.CrudOperationServiceImpl;
-import kg.megacom.sts.service.Impl.UserServiceImpl;
+import kg.megacom.sts.models.Order;
+import kg.megacom.sts.models.User;
+import kg.megacom.sts.models.enums.Status;
+import kg.megacom.sts.service.OrderService;
 import kg.megacom.sts.service.UserService;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        DbHelper dbHelper = new DbHelper();
-        CrudOperationService crudOperationService = new CrudOperationServiceImpl();
+    public static void main(String[] args) throws SQLException {
+
+        Scanner scanner = new Scanner(System.in);
 
 
-        System.out.println("Зайти как админ - 0");
-        System.out.println("Зайти как пользователь - 1");
+        OrderService orderService = OrderService.INSTANCE;
+        UserService userService = UserService.INSTANCE;
+//        orderService.createTable();
+//        userService.createTable();
 
-        switch (sc.nextInt()) {
-            case 0:
-                crudOperationService.crudObjects();
-                break;
-            case 1:
-                crudOperationService.userCreating();
-                break;
-        }
+        User user = new User("Salamat", 27, "Привет", "Salamat@gmail.com", Status.В_ОЖИДАНИИ);
+        userService.createUser(user);
+        List<User> userList = userService.getAllUsers();
+        System.out.println();
+        userList.stream().forEach(System.out::println);
+
+        Order order = new Order(user, 2, Status.В_ОЖИДАНИИ, false, "hi");
+        orderService.createOrder(order);
+
+
+//        System.out.println("Зайти как админ - 0");
+//        System.out.println("Зайти как пользователь - 1");
+//
+//        switch (sc.nextInt()) {
+//            case 0:
+//                crudOperationService.crudObjects();
+//                break;
+//            case 1:
+//                crudOperationService.userCreating();
+//                break;
+//        }
+        //  CrudOperationService crudOperationService = new CrudOperationServiceImpl();
     }
 }

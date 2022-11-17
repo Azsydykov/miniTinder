@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbHelperRepImpl implements DbHelperRep {
-    DbHelperRep dbHelperRep = DbHelperRep.INSTANCE;
-
     private final String url = "jdbc:postgresql://Localhost/miniTinder";
     private final String user = "postgres";
     private final String password = "postgres";

@@ -12,8 +12,8 @@ public interface UserService {
     User createUser(User user);
     List<User> getAllUsers();
     User getUserById(Long id);
-
     public void deleteUser(int id);
+    boolean changeStatus(User user, int userStatusCode);
 
 
 

@@ -12,7 +12,6 @@ public class User {
     private Status status;
 
     public User(String name, int age, String definition, String email, Status status) {
-        this.id = id;
         this.name = name;
         this.age = age;
         this.definition = definition;

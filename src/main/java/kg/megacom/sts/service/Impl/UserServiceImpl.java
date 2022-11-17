@@ -6,16 +6,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    UserRep userRepImpl = UserRep.INSTANCE;
+    UserRep userRep = UserRep.INSTANCE;
 
     @Override
     public void createTable() throws SQLException {
-        userRepImpl.createTable();
+        userRep.createTable();
     }
     @Override
     public User createUser(User user)  {
       try {
-          userRepImpl.save(user);
+          userRep.save(user);
       }catch (SQLException throwables){
           throwables.printStackTrace();
       }
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepImpl.getAllUsers();
+        return userRep.getAllUsers();
     }
 
     @Override
@@ -34,7 +34,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(int id) {
+    }
 
+    @Override
+    public boolean changeStatus(User user, int userStatusCode) {
+        return false;
     }
 }
 

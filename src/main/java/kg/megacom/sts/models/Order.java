@@ -5,19 +5,18 @@ import kg.megacom.sts.models.enums.Status;
 public class Order {
     private long id;
     private User user;
-    private long recipientId;
-    private Status status;
+    private User recipientId;
     private boolean match;
     private String message;
+    private Status status;
 
 
-    public Order(User user, long recipientId, Status status,boolean match ,String message) {
-        this.id = id;
+    public Order(User user, User recipientId, boolean match, String message, Status status) {
         this.user = user;
         this.recipientId = recipientId;
-        this.status = status;
         this.match = match;
         this.message = message;
+        this.status = status;
     }
 
     public Order() {
@@ -39,20 +38,12 @@ public class Order {
         this.user = user;
     }
 
-    public Status getStatus() {
-        return status;
+    public User getRecipientId() {
+        return recipientId;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public void setRecipientId(User recipientId) {
+        this.recipientId = recipientId;
     }
 
     public boolean isMatch() {
@@ -63,23 +54,31 @@ public class Order {
         this.match = match;
     }
 
-    public long getRecipientId() {
-        return recipientId;
+    public String getMessage() {
+        return message;
     }
 
-    public void setRecipientId(long receipentId) {
-        this.recipientId = receipentId;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", user=" + user.getId() +
-                ", status=" + status +
-                ", message='" + message + '\'' +
+                ", user=" + user +
+                ", recipientId=" + recipientId +
                 ", match=" + match +
-                ", receipentId=" + recipientId +
+                ", message='" + message + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

@@ -6,20 +6,20 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
-    OrderRep orderRepImpl = OrderRep.INSTANCE;
+    OrderRep orderRep = OrderRep.INSTANCE;
 
     @Override
     public void createTable() throws SQLException {
-        orderRepImpl.createTable();
+        orderRep.createTable();
     }
 
     @Override
     public Order createOrder(Order order)  {
-            orderRepImpl.createOrder(order);
+            orderRep.createOrder(order);
         return null;
     }
     @Override
     public List<Order> getAllOrders() {
-        return orderRepImpl.getAllOrders();
+        return orderRep.getAllOrders();
     }
 }

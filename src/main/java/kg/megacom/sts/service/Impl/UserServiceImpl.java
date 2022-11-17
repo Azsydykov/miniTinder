@@ -29,11 +29,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return null;
+      return userRep.getUserById(id);
     }
 
     @Override
     public void deleteUser(int id) {
+        userRep.deleteUser(id);
     }
 
     @Override

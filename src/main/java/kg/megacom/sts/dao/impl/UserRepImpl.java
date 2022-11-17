@@ -86,12 +86,9 @@ public class UserRepImpl implements UserRep {
     public void deleteUser(int id) {
         try (PreparedStatement ps = dbHelperRep.connect().prepareStatement("delete from tb_users where id=?")){
             ps.setInt(1, id);
-            int result = ps.executeUpdate();
-            if (result == 1) {
-                System.out.println("Пользователь успешно удалён");
-            } else if (result == 0) {
-                System.out.println("Запрос успешно выполнен. Заняло 0мс, 0 строк изменено");
-            }
+            ps.executeUpdate();
+            System.out.println("Пользователь успешно удалён.");
+
         } catch (SQLException throwables) {
             throw new RuntimeException("Произошла ошибка при удалении пользователя!");
         }

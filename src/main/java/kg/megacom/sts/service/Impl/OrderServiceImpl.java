@@ -34,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
         Order orderNew = new Order();
         int scannedNum;
         System.out.println("Вывберите пользователя из списка!");
+        System.out.println();
         AtomicInteger counter = new AtomicInteger(1);
         List<User> userList = userService.getAllUsers();
 
@@ -54,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("Выше тайное сообщение:");
         orderNew.setMessage(sc.next());
         orderNew.setMatch(false);
-        orderNew.getStatus().equals(OrderStatus.ЗАПРОС_ОТПРАВЛЕН);
+        orderNew.setStatus(OrderStatus.ЗАПРОС_ОТПРАВЛЕН);
         orderNew.setUser(user);
         saveOrder(orderNew);
         System.out.println("Запрос успешно создан!");

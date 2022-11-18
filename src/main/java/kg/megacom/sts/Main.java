@@ -20,6 +20,7 @@ public class Main {
 //        orderService.createTable();
 //        userService.createTable();
 
+        // Регистрация, авторизация
         System.out.println("Выберите операцию:\n" +
                 "1 - Зарегестрироваться \n" +
                 "2 - У вас уже есть аккаунт\n" +
@@ -47,7 +48,7 @@ public class Main {
                 }
                 break;
         }
-        // Creating order
+        // Создание запроса
         System.out.println();
         System.out.println("1)Отправить запрос         2) Посмотреть мои отправленные запросы");
         switch (sc.nextInt()) {

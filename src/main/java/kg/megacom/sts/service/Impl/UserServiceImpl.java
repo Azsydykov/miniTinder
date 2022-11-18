@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
         System.out.println("Введите ваш email адрес:");
         String userLogin = sc.next();
         User foundUser = findByEmail(userLogin);
-        while (foundUser.getId() == null) {
+        while (foundUser.getEmail() == null) {
             System.out.println("Пользователь не найдет повторите еще!");
             userAuth();
         }

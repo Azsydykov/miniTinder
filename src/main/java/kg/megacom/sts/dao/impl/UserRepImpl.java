@@ -2,7 +2,9 @@ package kg.megacom.sts.dao.impl;
 import kg.megacom.sts.dao.DbHelperRep;
 import kg.megacom.sts.dao.UserRep;
 import kg.megacom.sts.models.User;
-import kg.megacom.sts.models.enums.Status;
+import kg.megacom.sts.models.enums.UserStatus;
+
+import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +55,7 @@ public class UserRepImpl implements UserRep {
                 user.setAge(resultSet.getInt("age"));
                 user.setDefinition(resultSet.getString("definition"));
                 user.setEmail(resultSet.getString("email"));
-                user.setStatus(Status.valueOf(resultSet.getString("status")));
+                user.setStatus(UserStatus.valueOf(resultSet.getString("status")));
                 userList.add(user);
             }
         } catch (SQLException throwables) {
@@ -69,12 +71,12 @@ public class UserRepImpl implements UserRep {
             ResultSet resultSet = ps.executeQuery();
             User user = new User();
             while (resultSet.next()) {
-                user.setId(resultSet.getInt("id"));
+                user.setId(resultSet.getLong("id"));
                 user.setName(resultSet.getString("name"));
                 user.setAge(resultSet.getInt("age"));
                 user.setDefinition(resultSet.getString("definition"));
                 user.setEmail(resultSet.getString("email"));
-                user.setStatus(Status.valueOf(resultSet.getString("status")));
+                user.setStatus(UserStatus.valueOf(resultSet.getString("status")));
             }
             return user;
         } catch (SQLException throwables) {
@@ -92,5 +94,23 @@ public class UserRepImpl implements UserRep {
         } catch (SQLException throwables) {
             throw new RuntimeException("Произошла ошибка при удалении пользователя!");
         }
+    }
+
+    @Override
+    public User findByEmail(String email) throws SQLException {
+        User user = new User();
+        try(PreparedStatement ps = dbHelperRep.connect().prepareStatement("select * from tb_users where email=?")){
+            ps.setString(1,email);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+                user.setId(resultSet.getLong("id"));
+                user.setName(resultSet.getString("name"));
+                user.setAge(resultSet.getInt("age"));
+                user.setDefinition(resultSet.getString("definition"));
+                user.setEmail(resultSet.getString("email"));
+                user.setStatus(UserStatus.valueOf(resultSet.getString("status")));
+            }
+        }
+        return user;
     }
 }

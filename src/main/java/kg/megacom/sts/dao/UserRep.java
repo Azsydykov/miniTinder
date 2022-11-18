@@ -12,7 +12,9 @@ public interface UserRep {
     void save(User user) throws SQLException;
     List<User> getAllUsers();
     User getUserById(Long id);
+    void deleteUser(int id);
+    User findByEmail(String email) throws SQLException;
 
-    public void deleteUser(int id);
+
 
 }

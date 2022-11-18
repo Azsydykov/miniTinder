@@ -1,6 +1,7 @@
 package kg.megacom.sts.models;
 
-import kg.megacom.sts.models.enums.Status;
+import kg.megacom.sts.models.enums.OrderStatus;
+
 
 public class Order {
     private long id;
@@ -8,10 +9,10 @@ public class Order {
     private User recipientId;
     private boolean match;
     private String message;
-    private Status status;
+    private OrderStatus status;
 
 
-    public Order(User user, User recipientId, boolean match, String message, Status status) {
+    public Order(User user, User recipientId, boolean match, String message, OrderStatus status) {
         this.user = user;
         this.recipientId = recipientId;
         this.match = match;
@@ -62,11 +63,11 @@ public class Order {
         this.message = message;
     }
 
-    public Status getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 

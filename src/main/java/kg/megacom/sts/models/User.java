@@ -1,6 +1,6 @@
 package kg.megacom.sts.models;
 
-import kg.megacom.sts.models.enums.Status;
+import kg.megacom.sts.models.enums.UserStatus;
 
 public class User {
     private long id;
@@ -9,9 +9,9 @@ public class User {
     private String definition;
     private String email;
 
-    private Status status;
+    private UserStatus status;
 
-    public User(String name, int age, String definition, String email, Status status) {
+    public User(String name, int age, String definition, String email, UserStatus status) {
         this.name = name;
         this.age = age;
         this.definition = definition;
@@ -22,11 +22,15 @@ public class User {
     public User() {
     }
 
-    public long getId() {
+    public User(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,23 +66,18 @@ public class User {
         this.email = email;
     }
 
-    public Status getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", diff='" + definition + '\'' +
-                ", email='" + email + '\'' +
-                ", status=" + status +
-                '}'+" \n";
+                "name='" + name + '\'' + ", definition='" + definition + '\'' + ", age=" + age + '}'+"\n";
     }
+
 }

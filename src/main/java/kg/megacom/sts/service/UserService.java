@@ -9,11 +9,16 @@ public interface UserService {
 
 
     void createTable() throws SQLException;
-    User createUser(User user);
+    User createUser();
     List<User> getAllUsers();
     User getUserById(Long id);
     public void deleteUser(int id);
     boolean changeStatus(User user, int userStatusCode);
+    User userAuth();
+    void operationWithUser();
+
+    User findByEmail(String email) throws SQLException;
+
 
 
 

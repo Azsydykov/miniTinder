@@ -1,9 +1,11 @@
 package kg.megacom.sts.dao.impl;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import kg.megacom.sts.dao.DbHelperRep;
 import kg.megacom.sts.dao.OrderRep;
 import kg.megacom.sts.models.Order;
 import kg.megacom.sts.models.User;
-import kg.megacom.sts.models.enums.Status;
+import kg.megacom.sts.models.enums.OrderStatus;
+import kg.megacom.sts.models.enums.UserStatus;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class OrderRepImpl implements OrderRep {
         }
     }
     @Override
-    public void createOrder(Order order) {
+    public void saveOrder(Order order) {
         try (PreparedStatement ps = dbHelperRep.connect().prepareStatement("insert into tb_order (tb_user_id ,recipient_id,match,message,status) " +
                 "VALUES (?, ?, ?, ?, ?)")) {
 
@@ -35,14 +37,11 @@ public class OrderRepImpl implements OrderRep {
             ps.setString(4, order.getMessage());
             ps.setString(5, String.valueOf(order.getStatus()));
 
-            int result = ps.executeUpdate();
-            if (result == 1) {
-                System.out.println("Обьект успешно добавлен");
-            } else if (result == 0) {
-                System.out.println("Запрос успешно выполнен. Заняло 0мс, 0 строк изменено");
-            }
+           ps.execute();
+
         } catch (SQLException throwables) {
-            throw new RuntimeException("Произошла ошибка при добавлении заявки");
+            System.out.println(throwables.getMessage());
+            throwables.printStackTrace();
         }
 
     }
@@ -59,7 +58,7 @@ public class OrderRepImpl implements OrderRep {
 
                 User user = new User();
                 user.setId(resultSet.getLong("tb_user_id"));
-                order.setStatus(Status.valueOf(resultSet.getString("status")));
+                order.setStatus(OrderStatus.valueOf(resultSet.getString("status")));
                 order.setMessage(resultSet.getString("message"));
                 order.setMatch(resultSet.getBoolean("match"));
                 user.setId(resultSet.getLong("recipient_id"));
@@ -71,5 +70,41 @@ public class OrderRepImpl implements OrderRep {
         } catch (SQLException throwables) {
             throw new RuntimeException("Произошла ошибка при выводе списка заявок");
         }
+    }
+
+    @Override
+    public Order getOrderById(Long id) {
+        try ( PreparedStatement ps = dbHelperRep.connect().prepareStatement("select * from tb_order where id= ?")){
+            ps.setInt(1, Math.toIntExact(id));
+            ResultSet resultSet = ps.executeQuery();
+
+            Order order = new Order();
+            while (resultSet.next()) {
+                order.setId(resultSet.getLong("id"));
+                User user = new User();
+                user.setId(resultSet.getLong("tb_user_id"));
+                order.setStatus(OrderStatus.valueOf(resultSet.getString("status")));
+                order.setMessage(resultSet.getString("message"));
+                order.setMatch(resultSet.getBoolean("match"));
+                user.setId(resultSet.getLong("recipient_id"));
+                order.setUser(user);
+            }
+            return order;
+        } catch (SQLException throwables) {
+            throw new RuntimeException("Произошла ошибка при выводе пользователя!");
+        }
+    }
+
+    @Override
+    public void deleteOrderById(int id) {
+        try (PreparedStatement ps = dbHelperRep.connect().prepareStatement("delete from tb_order where id=?")){
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            System.out.println("Заявка успешно удалена.");
+
+        } catch (SQLException throwables) {
+            throw new RuntimeException("Произошла ошибка при удалении заявки!");
+        }
+
     }
 }

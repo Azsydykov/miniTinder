@@ -6,15 +6,15 @@ import kg.megacom.sts.models.enums.OrderStatus;
 public class Order {
     private long id;
     private User user;
-    private User recipientId;
+    private User recipient;
     private boolean match;
     private String message;
     private OrderStatus status;
 
 
-    public Order(User user, User recipientId, boolean match, String message, OrderStatus status) {
+    public Order(User user, User recipient, boolean match, String message, OrderStatus status) {
         this.user = user;
-        this.recipientId = recipientId;
+        this.recipient = recipient;
         this.match = match;
         this.message = message;
         this.status = status;
@@ -39,12 +39,12 @@ public class Order {
         this.user = user;
     }
 
-    public User getRecipientId() {
-        return recipientId;
+    public User getRecipient() {
+        return recipient;
     }
 
-    public void setRecipientId(User recipientId) {
-        this.recipientId = recipientId;
+    public void setRecipientId(User recipient) {
+        this.recipient = recipient;
     }
 
     public boolean isMatch() {
@@ -74,12 +74,13 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
+            //    "id=" + id +
                 ", user=" + user +
-                ", recipientId=" + recipientId +
-                ", match=" + match +
+                ", recipient=" + recipient +
+             //   ", match=" + match +
                 ", message='" + message + '\'' +
                 ", status=" + status +
-                '}';
+                '}'+"\n";
     }
+
 }

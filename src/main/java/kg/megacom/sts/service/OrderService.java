@@ -15,4 +15,9 @@ public interface OrderService {
     public void deleteOrderById(int id);
     void operationWithOrder();
     void saveOrder(Order order);
+    boolean check(Long userId, Long recipient);
+    List<Order> getUserOrders(User user);
+    void updateOrder(long id);
+    long  getOrderIdByUsers(long userId, long recipientId);
+
 }

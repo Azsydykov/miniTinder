@@ -14,4 +14,9 @@ public interface OrderRep {
     public List<Order> getAllOrders();
     Order getOrderById(Long id);
     public void deleteOrderById(int id);
+    boolean check(Long userId, Long recipient);
+    List<Order> getUserOrders(User user);
+    void updateOrder(long id);
+    long  getOrderIdByUsers(long userId, long recipientId);
+
 }

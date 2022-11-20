@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         String userLogin = sc.next();
         User foundUser = findByEmail(userLogin);
         while (foundUser.getEmail() == null) {
-            System.out.println("Пользователь не найдет повторите еще!");
+            System.out.println("Пользователь не найден повторите еще!");
             userAuth();
         }
         return foundUser;

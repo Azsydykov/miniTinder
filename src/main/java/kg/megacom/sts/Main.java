@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
 
     public static void main(String[] args) throws SQLException {
         Scanner sc = new Scanner(System.in);
@@ -34,7 +31,7 @@ public class Main {
                 System.out.println(user = userService.userAuth());
             }
             break;
-            case 3:
+            case 3: {
                 System.out.println("Выберите объект с которым хотите совершить операции.\n1 - Пользователь \n2 - Заявки");
                 switch (sc.nextInt()) {
                     case 1: {
@@ -43,23 +40,25 @@ public class Main {
                     break;
                     case 2: {
                         orderService.operationWithOrder();
-                        break;
                     }
+                    break;
                 }
-                break;
+            }
+            return ;
         }
+
         // Создание запроса
         System.out.println();
-        System.out.println("1)Отправить запрос         2) Посмотреть мои отправленные запросы");
+        System.out.println("1) Отправить запрос         2) Посмотреть мои отправленные запросы");
         switch (sc.nextInt()) {
             case 1: {
                 orderService.createOrder(user);
+                break;
             }
-
+            case 2: {
+                System.out.println(orderService.getUserOrders(user));
+                break;
+            }
         }
-
-
     }
-
-
 }

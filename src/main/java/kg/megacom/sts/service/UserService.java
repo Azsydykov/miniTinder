@@ -16,8 +16,9 @@ public interface UserService {
     boolean changeStatus(User user, int userStatusCode);
     User userAuth();
     void operationWithUser();
-
     User findByEmail(String email) throws SQLException;
+
+
 
 
 

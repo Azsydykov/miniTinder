@@ -8,6 +8,7 @@ import kg.megacom.sts.service.OrderService;
 import kg.megacom.sts.service.UserService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -23,10 +24,17 @@ public class OrderServiceImpl implements OrderService {
         orderRep.createTable();
     }
 
-    private List<User> checkIfOrderExists(List<User> userList) {
+    private List<User> checkIfOrderExists(List<User> userList, User user) {
 
+        List<Order> userOrdersList = orderRep.getUserOrders(user);
+        List<User> uList = new ArrayList<>();
+        for (User u : userList) {
+            userOrdersList.forEach(x -> {
+                if (x.getRecipient().getId() != u.getId() && !uList.contains(u)) uList.add(u);
+            });
 
-        return userList;
+        }
+        return uList;
     }
 
     @Override
@@ -38,6 +46,7 @@ public class OrderServiceImpl implements OrderService {
         AtomicInteger counter = new AtomicInteger(1);
         List<User> userList = userService.getAllUsers();
 
+
         List<User> selectedUserList = userList.stream().filter(x -> x.getId() != user.getId()).collect(Collectors.toList());
 
         selectedUserList.forEach(x -> {
@@ -48,14 +57,23 @@ public class OrderServiceImpl implements OrderService {
             System.out.println();
             counter.getAndIncrement();
         });
+
         scannedNum = sc.nextInt();
         User selectedUser = selectedUserList.get(scannedNum - 1);
         System.out.println("Вы выбрали " + selectedUser.getName());
         orderNew.setRecipientId(selectedUser);
         System.out.println("Выше тайное сообщение:");
         orderNew.setMessage(sc.next());
-        orderNew.setMatch(false);
-        orderNew.setStatus(OrderStatus.ЗАПРОС_ОТПРАВЛЕН);
+        if (orderRep.check(selectedUser.getId(), user.getId())) {
+            orderNew.setMatch(true);
+            orderNew.setStatus(OrderStatus.ВЗАИМНО);
+            orderRep.updateOrder(orderRep.getOrderIdByUsers(selectedUser.getId(), user.getId()));
+            System.out.println("У вас взаимная симпатия!");
+        } else {
+            orderNew.setMatch(false);
+            orderNew.setStatus(OrderStatus.ЗАПРОС_ОТПРАВЛЕН);
+
+        }
         orderNew.setUser(user);
         saveOrder(orderNew);
         System.out.println("Запрос успешно создан!");
@@ -107,5 +125,25 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrder(Order order) {
         orderRep.saveOrder(order);
+    }
+
+    @Override
+    public boolean check(Long userId, Long recipient) {
+        return orderRep.check(userId, recipient);
+    }
+
+    @Override
+    public List<Order> getUserOrders(User user) {
+        return orderRep.getUserOrders(user);
+    }
+
+    @Override
+    public void updateOrder(long id) {
+        orderRep.updateOrder(id);
+    }
+
+    @Override
+    public long getOrderIdByUsers(long userId, long recipientId) {
+        return orderRep.getOrderIdByUsers(userId, recipientId);
     }
 }

@@ -74,13 +74,7 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-            //    "id=" + id +
-                ", user=" + user +
-                ", recipient=" + recipient +
-             //   ", match=" + match +
-                ", message='" + message + '\'' +
-                ", status=" + status +
-                '}'+"\n";
+                " user= " + user + ", recipient= " + recipient + ", message= " + message + ", status= " + status + '}' + "\n";
     }
 
 }

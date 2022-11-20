@@ -65,14 +65,12 @@ public class OrderRepImpl implements OrderRep {
                 Order order = new Order();
                 order.setId(resultSet.getLong("id"));
 
-                User user = new User();
-                user.setId(resultSet.getLong("tb_user_id"));
+                order.setUser(userService.getUserById(resultSet.getLong("tb_user_id")));
                 order.setStatus(OrderStatus.valueOf(resultSet.getString("status")));
                 order.setMessage(resultSet.getString("message"));
                 order.setMatch(resultSet.getBoolean("match"));
-                user.setId(resultSet.getLong("recipient_id"));
-                order.setUser(user);
-                order.setRecipientId(user);
+                order.setRecipientId(userService.getUserById(resultSet.getLong("recipient_id")));
+
                 orderList.add(order);
             }
             return orderList;

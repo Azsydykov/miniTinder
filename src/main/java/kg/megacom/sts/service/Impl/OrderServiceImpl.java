@@ -15,6 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     OrderRep orderRep = OrderRep.INSTANCE;
     UserService userService = UserService.INSTANCE;
     Scanner sc = new Scanner(System.in);
@@ -68,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
             orderNew.setMatch(true);
             orderNew.setStatus(OrderStatus.ВЗАИМНО);
             orderRep.updateOrder(orderRep.getOrderIdByUsers(selectedUser.getId(), user.getId()));
-            System.out.println("У вас взаимная симпатия!");
+            System.out.println(ANSI_GREEN + "У вас взаимная симпатия!"+ ANSI_RESET);
         } else {
             orderNew.setMatch(false);
             orderNew.setStatus(OrderStatus.ЗАПРОС_ОТПРАВЛЕН);

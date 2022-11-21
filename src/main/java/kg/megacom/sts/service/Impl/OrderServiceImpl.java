@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
         List<User> uList = new ArrayList<>();
         for (User u : userList) {
             userOrdersList.forEach(x -> {
-                if (x.getRecipient().getId() != u.getId() && !uList.contains(u)) uList.add(u);
+                if (x.getRecipient().getId() != u.getId());
             });
 
         }
@@ -48,8 +48,6 @@ public class OrderServiceImpl implements OrderService {
         System.out.println();
         AtomicInteger counter = new AtomicInteger(1);
         List<User> userList = userService.getAllUsers();
-
-
         List<User> selectedUserList = userList.stream().filter(x -> x.getId() != user.getId()).collect(Collectors.toList());
 
         selectedUserList.forEach(x -> {

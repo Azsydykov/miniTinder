@@ -13,8 +13,6 @@ public class UserServiceImpl implements UserService {
     Scanner sc = new Scanner(System.in);
     UserRep userRep = UserRep.INSTANCE;
 
-
-
     @Override
     public void createTable() throws SQLException {
         userRep.createTable();
@@ -67,12 +65,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userAuth() {
-        System.out.println("Введите ваш email адрес:");
-        String userLogin = sc.next();
-        User foundUser = findByEmail(userLogin);
-        while (foundUser.getEmail() == null) {
-            System.out.println("Пользователь не найден повторите еще!");
-            userAuth();
+        User foundUser = null;
+        boolean isTrue = true;
+        while (isTrue) {
+            System.out.println("Введите вашу почту");
+            String usersLogin = sc.next();
+            foundUser = findByEmail(usersLogin);
+            if (foundUser.getEmail() != null) {
+                break;
+            } else {
+                System.out.println("Пользователь не найдет повторите еще ");
+            }
         }
         return foundUser;
     }
@@ -90,25 +93,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public void operationWithUser() {
 
-            System.out.println("Выберите операцию:\n" +
-                    "1 - Получить список пользователей \n" + "2 - Удалить пользователя по id \n" +
-                    "3 - Вывести пользователя по id \n");
-            int chooseOperation = sc.nextInt();
-            switch (chooseOperation) {
-                case 1:
-                    System.out.println("\n Список пользователей");
-                    System.out.println(userRep.getAllUsers());
-                    break;
-                case 2:
-                    System.out.println(userRep.getAllUsers());
-                    System.out.println("\nВведите id пользователя, которого хотите удалить: ");
-                    userRep.deleteUser(sc.nextInt());
-                    break;
-                case 3:
-                    System.out.println("Введите id пользователя для вывода");
-                    System.out.println(userRep.getUserById(sc.nextLong()));
-                    break;
-            }
+        System.out.println("Выберите операцию:\n" +
+                "1 - Получить список пользователей \n" + "2 - Удалить пользователя по id \n" +
+                "3 - Вывести пользователя по id \n");
+        int chooseOperation = sc.nextInt();
+        switch (chooseOperation) {
+            case 1:
+                System.out.println("\n Список пользователей");
+                System.out.println(userRep.getAllUsers());
+                break;
+            case 2:
+                System.out.println(userRep.getAllUsers());
+                System.out.println("\nВведите id пользователя, которого хотите удалить: ");
+                userRep.deleteUser(sc.nextInt());
+                break;
+            case 3:
+                System.out.println("Введите id пользователя для вывода");
+                System.out.println(userRep.getUserById(sc.nextLong()));
+                break;
         }
     }
+}
 
